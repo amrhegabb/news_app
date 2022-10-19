@@ -8,11 +8,11 @@ class ApiManager {
   static const String BASE_URL = "newsapi.org";
   static const String API_KEY = "1e8853852e444154ade08772679a51f1";
 
-  static Future<SourcesResponse> getSources() async {
+  static Future<SourcesResponse> getSources(String categoryid) async {
     var uri = Uri.https(
       BASE_URL,
       "/v2/top-headlines/sources",
-      {"apiKey": API_KEY, "category": "sports"},
+      {"apiKey": API_KEY, "category": categoryid},
     );
     var response = await http.get(uri);
     var json = jsonDecode(response.body);
@@ -20,9 +20,10 @@ class ApiManager {
     return sourcesResponse;
   }
 
-  static Future<NewsResponse> getNewsBySource(String sourceId) async {
-    var uri = Uri.https(
-        BASE_URL, "/v2/everything", {"apiKey": API_KEY, "sources": sourceId});
+  static Future<NewsResponse> getNewsBySource(
+      {String? sourceId, String? query}) async {
+    var uri = Uri.https(BASE_URL, "/v2/everything",
+        {"apiKey": API_KEY, "sources": sourceId, 'q': query});
     var response = await http.get(uri);
     var json = jsonDecode(response.body);
     NewsResponse newsResponse = NewsResponse.fromJson(json);

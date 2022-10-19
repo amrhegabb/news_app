@@ -1,11 +1,8 @@
-import 'package:flutter/cupertino.dart';
 import 'package:flutter/material.dart';
-import 'package:flutter/src/foundation/key.dart';
-import 'package:flutter/src/widgets/framework.dart';
-import 'package:news_app/Home/newsWidgit.dart';
 import 'package:news_app/apiManager.dart';
 import 'package:news_app/model/newsResponse.dart';
 import 'package:news_app/model/sourcesResponse.dart';
+import 'package:news_app/news/newsWidgit.dart';
 
 class NewsList extends StatelessWidget {
   Source source;
@@ -15,7 +12,7 @@ class NewsList extends StatelessWidget {
   Widget build(BuildContext context) {
     return Expanded(
       child: FutureBuilder<NewsResponse>(
-        future: ApiManager.getNewsBySource(source.id ?? ""),
+        future: ApiManager.getNewsBySource(sourceId: source.id),
         builder: (context, snapshot) {
           if (snapshot.hasError) {
             return Text(snapshot.error.toString());
@@ -25,14 +22,17 @@ class NewsList extends StatelessWidget {
             );
           }
           var data = snapshot.data;
-          if (data == "error") {
+          if (data?.code == "error") {
             return Center(child: Text("${data?.message}"));
           }
-          return ListView.builder(
+          return ListView.separated(
             itemBuilder: (context, index) {
               return NewsWidgit(data!.NewsList![index]);
             },
             itemCount: data!.NewsList!.length,
+            separatorBuilder: (context, index) => const Divider(
+              thickness: 3,
+            ),
           );
         },
       ),

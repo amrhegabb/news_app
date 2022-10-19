@@ -1,7 +1,9 @@
 import 'package:flutter/material.dart';
-import 'package:news_app/Home/news_list_widgit.dart';
-import 'package:news_app/Home/sourceTab.dart';
+
 import 'package:news_app/model/sourcesResponse.dart';
+import 'package:news_app/news/sourceTab.dart';
+
+import 'news_list_widgit.dart';
 
 class SourcesTabs extends StatefulWidget {
   List<Source> sources;
