@@ -3,9 +3,7 @@
 A new Flutter project.
 
 ## Getting Started
-This simple application allows you to note your next tasks by time and date, you can add them to
-done tasks and you can delete them, and it can reminder your task and repeater, and show all the
-tasks in calendar.
-Todo-App Using Provider, FitebaseFireStore, 
+This application can get the latest Business News, Sports News, Electronics News's
+
 ## App
 ![](https://github.com/amrhegabb/news_app/blob/devolpment/NewsApp%20MockUp.png)
